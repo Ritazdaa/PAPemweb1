@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <style>
+      /* CSS untuk Navbar */
+      .navbar-brand a {
+        color: black;
+        font-size: 1.2rem;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .navbar-nav {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+      }
+
+      .navbar-nav li {
+        margin-left: 10px;
+      }
+
+      .navbar-nav li a {
+        color: black;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      .navbar-nav li a:hover {
+        color: burlywood;
+        transform: scale(1.1);
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      .dropdown-item {
+        width:90%
+      }
+
+      /* CSS untuk Header */
+      .carousel {
+        margin-top: 60px;
+      }
+      .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+      }
+
+      .carousel-caption h5 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .carousel-caption p {
+        font-size: 1rem;
+      }
+
+      .carousel-inner img {
+        width: 600px;
+        height: 400px;
+      }
+
+      /* CSS untuk cari kost */
+      section#cari-kost {
+        background-image: url(backgroundHome.jpeg);
+        padding: 50px;
+      }
+
+      /* CSS untuk filter-lokasi dan filter-harga */
+      .filter-lokasi,
+      .filter-harga {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .filter-lokasi .lokasi,
+      .filter-harga .harga {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .filter-lokasi form select#lokasi,
+      .filter-harga form select#harga {
+        width: 300px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+        margin: 0 auto;
+      }
+
+      .filter-lokasi form select#lokasi:hover,
+      .filter-harga form select#harga:hover {
+        border-color: brown;
+        background-color: beige;
+      }
+
+      /* CSS untuk pusat bantuan */
+      #pusat-bantuan {
+        background-image: url(backgroundHome.jpeg);
+        padding: 50px 0;
+      }
+
+      #pusat-bantuan h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .pertanyaan {
+        margin-bottom: 30px;
+      }
+
+      .pertanyaan h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        margin-left: 20px;
+      }
+
+      .pertanyaan ul {
+        padding-left: 20px;
+        margin-left: 20px;
+      }
+
+      .pertanyaan li {
+        margin-bottom: 15px;
+      }
+
+      .pertanyaan h4 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .kontak {
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      /* CSS untuk Footer */
+      .footer {
+        background-image: url(backgroundHome.jpeg);
+        padding: 20px 0;
+        color: #000;
+      }
+
+      .footer h3 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .footer p {
+        font-size: 1rem;
+      }
+
+      .footer .container {
+        margin-top: 10px;
+      }
+
+      .fitur-item img {
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Awal Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <span class="brand-text">SMARTKOST</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-light" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#cari-kost">Cari Kost</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pusat-bantuan">Pusat Bantuan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="registrasi-pengguna.html">Daftar</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                >Login</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="login-pengguna.html"
+                    >Pencari Kost</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="login-admin.html"
+                    >Pemilik Kost</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Akhir Navbar -->
+
+    <!-- Awal Header -->
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="img/slider1.jpg" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5 style="color: #fff">Temukan Kost Nyaman di Banjarmasin</h5>
+            <p style="color: #fff">
+              Pilihan kost dengan fasilitas lengkap dan harga terjangkau di
+              sekitar Universitas Lambung Mangkurat.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="img/slider2.jpg" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5 style="color: #fff">Belajar dengan Lingkungan yang Nyaman</h5>
+            <p style="color: #fff">
+              Tinggal di kost dengan lingkungan aman dan tenang untuk fokus pada
+              studi Anda.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="img/slider3.jpg" class="d-block w-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5 style="color: #fff">Hunian Terbaik untuk Mahasiswa Baru</h5>
+            <p style="color: #fff">
+              SmartKost menyediakan kost-kost dengan fasilitas terbaik untuk
+              mahasiswa baru di Banjarmasin.
+            </p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- Akhir Header -->
+
+    <!-- Section Fitur-Fitur Unggulan -->
+    <div class="container mt-5 text-center">
+      <div class="row">
+          <div class="col-sm-4">
+              <img src="img/fasilitas lengkap.jpeg" alt="Gambar 1" class="img-fluid" width="100">
+              <h3>Fasilitas Lengkap</h3>
+              <p>Kost dengan fasilitas lengkap seperti kamar mandi dalam, WiFi, Meja
+                dan Bangku, dan lainnya.</p>
+          </div>
+          <div class="col-sm-4">
+              <img src="img/lingkungan nyama.jpeg" alt="Gambar 1" class="img-fluid" width="100">
+              <h3>Lingkungan Nyaman</h3>
+              <p>Kost yang berlokasi di lingkungan aman, tenang, dan nyaman untuk
+                mendukung belajar Anda.</p>
+          </div>
+          <div class="col-sm-4">
+              <img src="img/harga terjangkau.jpeg" alt="Gambar 1" class="img-fluid" width="100">
+              <h3>Harga Terjangkau</h3>        
+              <p>Kost dengan harga terjangkau untuk mahasiswa baru Universitas
+                Lambung Mangkurat.</p>
+          </div>
+      </div>
+    </div>
+    
+    <!-- Section Cari Kost -->
+    <section id="cari-kost">
+      <!-- Section Filter Lokasi -->
+      <section class="filter-lokasi">
+          <div class="lokasi">
+          <form>
+              <div class="form-group">
+              <h3>Silahkan Pilih Lokasi Berdasarkan Kebutuhan Anda</h3>
+              <label for="lokasi">Pilih Lokasi:</label>
+              <select class="form-control" id="lokasi" name="lokasi">
+                  <option value="">Semua Lokasi</option>
+                  <option value="Cendana">Cendana</option>
+                  <option value="Flamboyan">Flamboyan</option>
+                  <option value="Kayutangi 2">Kayutangi 2</option>
+                  <option value="Pangeran">Pangeran</option>
+              </select>
+              </div>
+          </form>
+          </div>
+      </section>
+      
+      <!-- Section Filter Harga -->
+      <section class="filter-harga">
+          <div class="harga">
+          <form>
+              <div class="form-group">
+              <label for="harga">Pilih Harga:</label>
+              <select class="form-control" id="harga" name="harga">
+                  <option value="">Semua Harga</option>
+                  <option value="Rp500.000 - Rp1.000.000">Rp500.000 - Rp1.000.000</option>
+                  <option value="Rp1.000.000 - Rp2.000.000">Rp1.000.000 - Rp2.000.000</option>
+              </select>
+              </div>
+          </form>
+          </div>
+      </section>
+
+      <!-- Tombol Pencarian -->
+      <div class="d-flex justify-content-center align-items-center mt-3">
+        <button id="search-button" class="btn btn-primary">Cari</button>
+      </div>
+
+      <!-- Container untuk Hasil Filter -->
+      <div id="hasil-filter"></div>
+    </section>
+
+    <!-- Section Pusat Bantuan -->
+    <section id="pusat-bantuan">
+      <h2>Pusat Bantuan</h2>
+      <div class="pertanyaan">
+        <h3>Tanya Jawab Umum</h3>
+        <ul>
+          <li>
+            <h4>Apa syarat untuk menjadi pencari kost di SmartKost?</h4>
+            <p>
+              Untuk menjadi pencari kost di SmartKost, Anda tidak perlu
+              melakukan registrasi khusus. Anda dapat langsung mengakses situs
+              SmartKost dan menggunakan fitur pencarian untuk mencari kost yang
+              sesuai dengan kebutuhan Anda.
+            </p>
+          </li>
+          <li>
+            <h4>Bagaimana cara mencari kost di SmartKost?</h4>
+            <p>
+              Anda dapat mencari kost di SmartKost dengan menggunakan fitur
+              pencarian yang terdapat di halaman "Cari Kost". Anda dapat
+              mengatur kriteria pencarian seperti lokasi, dan harga untuk
+              menemukan kost yang sesuai dengan kebutuhan Anda.
+            </p>
+          </li>
+          <li>
+            <h4>Bagaimana cara melakukan pemesanan kost di SmartKost?</h4>
+            <p>
+              Setelah menemukan kost yang Anda inginkan, Anda dapat mengklik
+              tombol pesan yang ada disamping tombol detail kost. Selanjutnya,
+              Anda dan pemilik kost dapat melakukan komunikasi untuk mengatur
+              proses pemesanan, pembayaran, dan lainnya.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="kontak">
+        <h3>Hubungi Kami</h3>
+        <p>
+          Jika Anda memiliki pertanyaan lain atau membutuhkan bantuan lebih
+          lanjut, silakan hubungi kami melalui:
+        </p>
+        <p>Email: info@smartkost.com</p>
+        <p>Telepon: 123-456-789</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h3>Tentang SmartKost</h3>
+            <p>
+              SmartKost adalah platform pencarian dan pemesanan kost-kostan
+              online. Kami menyediakan layanan untuk pemilik kost dan pencari
+              kost agar dapat saling terhubung dan memenuhi kebutuhan hunian.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-center">
+              &copy; 2023 SmartKost. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Dapatkan elemen tombol "Cari"
+        let searchButton = document.getElementById('search-button');
+    
+        // Tambahkan event listener saat tombol "Cari" ditekan
+        searchButton.addEventListener('click', function() {
+            // Dapatkan nilai yang dipilih dari dropdown lokasi
+            let lokasiDropdown = document.getElementById('lokasi');
+            let selectedLokasi = lokasiDropdown.value;
+    
+            // Dapatkan nilai yang dipilih dari dropdown harga
+            let hargaDropdown = document.getElementById('harga');
+            let selectedHarga = hargaDropdown.value;
+    
+            // Bangun nama file berdasarkan pilihan lokasi
+            let lokasiFileName = "";
+            if (selectedLokasi === "Cendana") {
+                lokasiFileName = "kost-cendana.html";
+            } else if (selectedLokasi === "Flamboyan") {
+                lokasiFileName = "kost-flamboyan.html";
+            } else if (selectedLokasi === "Kayutangi 2") {
+                lokasiFileName = "kost-kayutangi-2.html";
+            } else if (selectedLokasi === "Pangeran") {
+                lokasiFileName = "kost-pangeran.html";
+            }
+    
+            // Bangun nama file berdasarkan pilihan harga
+            let hargaFileName = "";
+            if (selectedHarga === "Rp500.000 - Rp1.000.000") {
+                hargaFileName = "kost-500.html";
+            } else if (selectedHarga === "Rp1.000.000 - Rp2.000.000") {
+                hargaFileName = "kost-sejuta.html";
+            }
+    
+            // Arahkan ke halaman HTML yang sesuai berdasarkan pilihan lokasi dan harga
+            let fileName = lokasiFileName || hargaFileName || "default.html";
+            window.location.href = fileName;
+        });
+    </script>    
+
+    <!-- Bootstrap Javascript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
