@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Section Cari Kost -->
+    <section id="cari-kost">
+        <!-- Section Filter Lokasi -->
+        <section class="filter-lokasi">
+            <div class="lokasi">
+            <form>
+                <div class="form-group">
+                <h3>Silahkan Pilih Lokasi Berdasarkan Kebutuhan Anda</h3>
+                <label for="lokasi">Pilih Lokasi:</label>
+                <select class="form-control" id="lokasi" name="lokasi">
+                    <option value="">Semua Lokasi</option>
+                    <option value="Cendana">Cendana</option>
+                    <option value="Flamboyan">Flamboyan</option>
+                    <option value="Kayutangi 2">Kayutangi 2</option>
+                    <option value="Pangeran">Pangeran</option>
+                </select>
+                </div>
+            </form>
+            </div>
+        </section>
+        
+        <!-- Section Filter Harga -->
+        <section class="filter-harga">
+            <div class="harga">
+            <form>
+                <div class="form-group">
+                <label for="harga">Pilih Harga:</label>
+                <select class="form-control" id="harga" name="harga">
+                    <option value="">Semua Harga</option>
+                    <option value="Rp500.000 - Rp1.000.000">Rp500.000 - Rp1.000.000</option>
+                    <option value="Rp1.000.000 - Rp2.000.000">Rp1.000.000 - Rp2.000.000</option>
+                </select>
+                </div>
+            </form>
+            </div>
+        </section>
+  
+    <!-- Tombol Pencarian -->
+    <button id="search-button">Cari</button>
+
+    <!-- Container untuk Hasil Filter -->
+    <div id="hasil-filter"></div>
+    </section>
+    <script>
+        // Dapatkan elemen tombol "Cari"
+        let searchButton = document.getElementById('search-button');
+    
+        // Tambahkan event listener saat tombol "Cari" ditekan
+        searchButton.addEventListener('click', function() {
+            // Dapatkan nilai yang dipilih dari dropdown lokasi
+            let lokasiDropdown = document.getElementById('lokasi');
+            let selectedLokasi = lokasiDropdown.value;
+    
+            // Dapatkan nilai yang dipilih dari dropdown harga
+            let hargaDropdown = document.getElementById('harga');
+            let selectedHarga = hargaDropdown.value;
+    
+            // Bangun nama file berdasarkan pilihan lokasi
+            let lokasiFileName = "";
+            if (selectedLokasi === "Cendana") {
+                lokasiFileName = "kost-cendana.html";
+            } else if (selectedLokasi === "Flamboyan") {
+                lokasiFileName = "kost-flamboyan.html";
+            } else if (selectedLokasi === "Kayutangi 2") {
+                lokasiFileName = "kost-kayutangi-2.html";
+            } else if (selectedLokasi === "Pangeran") {
+                lokasiFileName = "kost-pangeran.html";
+            }
+    
+            // Bangun nama file berdasarkan pilihan harga
+            let hargaFileName = "";
+            if (selectedHarga === "Rp500.000 - Rp1.000.000") {
+                hargaFileName = "kost-500.html";
+            } else if (selectedHarga === "Rp1.000.000 - Rp2.000.000") {
+                hargaFileName = "kost-sejuta.html";
+            }
+    
+            // Arahkan ke halaman HTML yang sesuai berdasarkan pilihan lokasi dan harga
+            let fileName = lokasiFileName || hargaFileName || "default.html";
+            window.location.href = fileName;
+        });
+    </script>    
+</body>
+</html>
