@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Kost</title>
+    <style>
+        .card {
+            background-color: rgb(208, 231, 255);
+            color: rgb(32, 32, 32);
+            padding: 1rem;
+        }
+
+        .cards {
+            max-width: 1200px;
+            display: grid;
+            grid-gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Daftar Kost</h1>
+    <div id="detailKostContainer" class="cards"></div>
+
+    <script>
+        // Contoh data detail kost dari Firebase
+        var detailKostData = [
+            {
+                title: 'Kost Putri Keisha',
+                image: 'img/cendana1.jpeg',
+                description: 'Jl. Cendana 2.A No.07, Sungai Miai, Kec. Banjarmasin Utara, Kota Banjarmasin, Kalimantan Selatan 70123. Rp 700.000',
+                link: 'https://example.com/kost-a-detail'
+            },
+            {
+                title: 'Kost Anugrah Cendana',
+                image: 'img/cendana2.jpeg',
+                description: 'Jl. Cendana 2.D No.rt 01, Sungai Miai, Banjarmasi Utara, Banjarmasin City, South Kalimantan Selatan 70123. Rp. 850.000',
+                link: 'https://example.com/kost-b-detail'
+            },
+            {
+                title: 'Kost B',
+                image: 'https://example.com/kost-b.jpg',
+                description: 'Deskripsi Kost B',
+                link: 'https://example.com/kost-b-detail'
+            },
+            {
+                title: 'Kost B',
+                image: 'https://example.com/kost-b.jpg',
+                description: 'Deskripsi Kost B',
+                link: 'https://example.com/kost-b-detail'
+            },
+            {
+                title: 'Kost B',
+                image: 'https://example.com/kost-b.jpg',
+                description: 'Deskripsi Kost B',
+                link: 'https://example.com/kost-b-detail'
+            },
+        ];
+
+        function tampilkanDetailKost() {
+            const detailKostContainer = document.getElementById("detailKostContainer");
+            detailKostContainer.innerHTML = "";
+
+            detailKostData.forEach(function (kost) {
+                detailKostContainer.innerHTML += `
+                    <div class="card">
+                        <h3>${kost.title}</h3>
+                        <img src="${kost.image}" style="height: 240px;">
+                        <p>${kost.description}</p>
+                        <a href="${kost.link}" target="_blank">
+                            <button>Detail</button>
+                        </a>
+                    </div>
+                `;
+            });
+        }
+
+        tampilkanDetailKost();
+    </script>
+</body>
+</html>
