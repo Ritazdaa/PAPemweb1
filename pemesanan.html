@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Menu Pembayaran</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script defer src="sidebar.js"></script>
+        <link rel="stylesheet" href="style-sidebar.css">
+        <link rel="stylesheet" href="style-data.css">
+    </head>
+<body>
+  <nav>
+    <button type="button" id="toggle-btn">
+      <i class="fa fa-bars"></i>
+    </button>
+    <span>SMARTKOST</span>
+    <ul class="sidebar-menu">
+      <li>
+        <a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a>
+      </li>
+      <li>
+        <a href="data-kamar.html"><i class="fa fa-bed"></i>Data Kamar</a>
+      </li>
+      <li>
+        <a href="data-kost.html"><i class="fa fa-building"></i>Data Kost</a>
+      </li>
+      <li>
+        <a href="pemesanan.html"><i class="fa fa-shopping-cart"></i>Pemesanan</a>
+      </li>
+      <li>
+        <a href="logout.html"><i class="fa fa-sign-out"></i>Logout</a>
+      </li>
+      <li id="bgModeBtn">
+        <a href="#"><i id="bgModeIcon" class="fa fa-sun-o"></i>Mode</a>
+      </li>
+    </ul>
+  </nav>
+  <section>
+    <div class="content">
+      <h1>Data Pemesanan</h1>
+      <table id="booking-table" class="table">
+        <thead>
+          <tr>
+            <th>Tanggal Bayar</th>
+            <th>Jumlah Pembayaran</th>
+            <th>Nama Pembayar</th>
+            <th>Nama Kost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data pemesanan akan ditambahkan ke sini -->
+        </tbody>
+      </table>      
+    </div>
+  </section>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, push, set } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+    import { onValue, ref } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+
+   // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBihKCxA8MXMH7U3cZ5ofqkr_IbEhBvJB4",
+    authDomain: "smartkost-pengguna.firebaseapp.com",
+    projectId: "smartkost-pengguna",
+    storageBucket: "smartkost-pengguna.appspot.com",
+    messagingSenderId: "293954114961",
+    appId: "1:293954114961:web:41f98c0bd8926f77e47630"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase();
+  const bookingsRef = ref(database, 'pemesanan'); 
+
+  onValue(bookingsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const bookings = snapshot.val();
+        const tableBody = document.querySelector("#booking-table tbody");
+
+        // Iterasi melalui data pemesanan dan tambahkan baris baru ke tabel
+        for (const bookingId in bookings) {
+          const booking = bookings[bookingId];
+          const newRow = document.createElement("tr");
+          
+          // Buat sel-sel untuk setiap kolom dalam baris
+          const tanggalBayarCell = document.createElement("td");
+          tanggalBayarCell.textContent = booking.tanggalBayar;
+          newRow.appendChild(tanggalBayarCell);
+
+          const jumlahPembayaranCell = document.createElement("td");
+          jumlahPembayaranCell.textContent = booking.jumlahPembayaran;
+          newRow.appendChild(jumlahPembayaranCell);
+
+          const namaPembayarCell = document.createElement("td");
+          namaPembayarCell.textContent = booking.namaPembayar;
+          newRow.appendChild(namaPembayarCell);
+
+          const namaKostCell = document.createElement("td");
+          namaKostCell.textContent = booking.namaKost;
+          newRow.appendChild(namaKostCell);
+
+          // Tambahkan baris ke tabel
+          tableBody.appendChild(newRow);
+        }
+      } else {
+        // Tidak ada data pemesanan yang ditemukan
+      }
+    }).catch((error) => {
+      console.error("Gagal mengambil data pemesanan:", error);
+    });
+  </script>
+</body>
+</html>

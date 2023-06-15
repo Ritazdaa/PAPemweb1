@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Data Kost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="sidebar.js"></script>
+    <link rel="stylesheet" href="style-data.css">
+    <link rel="stylesheet" href="style-sidebar.css">
+</head>
+<body>
+    <nav>
+        <button type="button" id="toggle-btn">
+            <i class="fa fa-bars"></i>
+        </button>
+        <span>SMARTKOST</span>
+        <ul class="sidebar-menu">
+            <li>
+              <a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="data-kamar.html"><i class="fa fa-bed"></i>Data Kamar</a>
+            </li>
+            <li>
+              <a href="data-kost.html"><i class="fa fa-building"></i>Data Kost</a>
+            </li>
+            <li>
+              <a href="pemesanan.html"><i class="fa fa-shopping-cart"></i>Pemesanan</a>
+            </li>
+            <li>
+              <a href="logout.html"><i class="fa fa-sign-out"></i>Logout</a>
+            </li>
+            <li id="bgModeBtn">
+              <a href="#"><i id="bgModeIcon" class="fa fa-sun-o"></i>Mode</a>
+            </li>
+          </ul>
+    </nav>
+    <section>
+        <div class="content">
+            <h1>Data Kost</h1>
+
+        <!-- Tambahkan kode untuk tombol tambah data -->
+        <div class="tambah-data">
+            <button class="btn" id="btnTambah">Tambah Data</button>
+        </div>
+
+        <div id="tabel">
+            <table id="tabel-main">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kost</th>
+                        <th>Lokasi</th>
+                        <th>Jumlah Kost</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
+                    <!-- Tambahkan data kamar secara dinamis menggunakan JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <div class="inputModal">
+                    <h3 id="judulModal">Tambah Data</h3>
+                    <table>
+                        <tr>
+                            <td><label for="namaKost">Nama Kost</label></td>
+                            <td><input type="text" name="namaKost" id="namaKost"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="lokasiKost">Lokasi Kost</label></td>
+                            <td><input type="text" name="lokasiKost" id="lokasiKost"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="jumlahKost">Jumlah Kost</label></td>
+                            <td><input type="number" name="jumlahKost" id="jumlahKost"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="button" value="Submit" name="submit" id="submit" class="btn"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Modal Edit Data -->
+        <div id="editModal" class="modal">
+
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <div class="inputModal">
+                    <h3 id="judulModal">Edit Data</h3>
+                    <table>
+                        <tr>
+                            <td><label for="namaKost">Nama Kost</label></td>
+                            <td><input type="text" name="namaKost" id="namaKostEdit"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="lokasiKost">Lokasi Kost</label></td>
+                            <td><input type="text" name="lokasiKost" id="lokasiKostEdit"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="jumlahKost">Jumlah Kost</label></td>
+                            <td><input type="number" name="jumlahKost" id="jumlahKostEdit"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="button" value="Submit" name="submit" id="submitEdit" class="btn"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+            // Import the functions you need from the SDKs you need
+
+            // TODO: Add SDKs for Firebase products that you want to use
+            import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyC_PYcofCE4qFSHRZ3HdASj0so1JL2xk-0",
+                authDomain: "smartkost-admin.firebaseapp.com",
+                projectId: "smartkost-admin",
+                storageBucket: "smartkost-admin.appspot.com",
+                messagingSenderId: "867643144489",
+                appId: "1:867643144489:web:9b6d5a19ef0a1728d19f38"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+
+            // Inisialisasi inputan
+            let namaKost = document.getElementById('namaKost');
+            let lokasiKost = document.getElementById('lokasiKost');
+            let jumlahKost = document.getElementById('jumlahKost');
+            var selectedKey;
+            var editModal = document.getElementById('editModal');
+
+            // Kerangka isi tbody
+            var tbody = document.getElementById('data');
+            var no = 0;
+
+            function addItemToTable(key, namaKost, lokasiKost, jumlahKost) {
+                let trow = document.createElement('tr');
+
+                let table = `
+                    <td>${++no}</td>
+                    <td>${namaKost}</td>
+                    <td>${lokasiKost}</td>
+                    <td>${jumlahKost}</td>
+                `;
+
+                let td = document.createElement('td');
+
+                let btnEdit = document.createElement('button');
+                let t = document.createTextNode('Edit');
+                btnEdit.id = 'btnEdit';
+                btnEdit.classList.add('btn');
+                btnEdit.value = key;
+                btnEdit.appendChild(t);
+                btnEdit.addEventListener('click', () => {
+                    editModal.style.display = 'block';
+                    selectedKey = btnEdit.value;
+                });
+                btnEdit.onclick = function () { showDataEdit(btnEdit.value) };
+
+                let btnHapus = document.createElement('button');
+                t = document.createTextNode('Hapus');
+                btnHapus.id = 'btnHapus';
+                btnHapus.classList.add('btn');
+                btnHapus.value = key;
+                btnHapus.appendChild(t);
+                btnHapus.addEventListener('click', (key) => {
+                    hapusData(btnEdit.value);
+                });
+
+                trow.innerHTML = table;
+                td.appendChild(btnEdit);
+                td.appendChild(btnHapus);
+                trow.appendChild(td);
+
+                tbody.appendChild(trow);
+            }
+
+            function AddAllItemToTable(Kost) {
+                no = 0;
+                tbody.innerHTML = '';
+                let jumlahSemua = 0;
+                Kost.forEach(element => {
+                    jumlahSemua += element.jumlahKost;
+                    addItemToTable(element.key, element.namaKost, element.lokasiKost, element.jumlahKost);
+                });
+                let trow = document.createElement('tr');
+                let table = `
+                    <td class="total" colspan="4"><b>Total Jumlah Semua Kost</td>
+                    <td class="total" colspan="2"><b>${jumlahSemua}</td>
+                `;
+                trow.innerHTML = table;
+                tbody.appendChild(trow);
+            }
+
+            // Tambah data
+            function tambahData() {
+                let data = {
+                    namaKost: namaKost.value,
+                    lokasiKost: lokasiKost.value,
+                    jumlahKost: parseInt(jumlahKost.value)
+                };
+
+                push(ref(database, 'kost'), data)
+                    .then(() => {
+                        namaKost.value = '';
+                        lokasiKost.value = '';
+                        jumlahKost.value = '';
+                        alert('Data berhasil ditambahkan');
+                    })
+                    .catch((error) => {
+                        alert('Data gagal ditambahkan');
+                    });
+            }
+
+            // Assign button
+            document.getElementById('submit').addEventListener('click', tambahData);
+
+            // Get data realtime
+            function getAllDataRealTime() {
+                const dbRef = ref(database, 'kost');
+
+                onValue(dbRef, (snapshot) => {
+                    var kost = [];
+                    snapshot.forEach(childSnapshot => {
+                        let temp = childSnapshot.val();
+                        temp['key'] = childSnapshot.key;
+                        kost.push(temp);
+                    });
+                    AddAllItemToTable(kost);
+                });
+            }
+            window.onload = getAllDataRealTime();
+
+            // Update data
+            var submitEdit = document.getElementById('submitEdit');
+            submitEdit.onclick = function () { updateData(selectedKey) };
+
+            function updateData(id) {
+                let data = {
+                    namaKost: namaKostEdit.value,
+                    lokasiKost: lokasiKostEdit.value,
+                    jumlahKost: parseInt(jumlahKostEdit.value)
+                };
+
+                update(ref(database, 'kost/' + id), data)
+                    .then(() => {
+                        namaKostEdit.value = '';
+                        lokasiKostEdit.value = '';
+                        jumlahKostEdit.value = '';
+                        editModal.style.display = 'none';
+                        alert('Data berhasil diupdate');
+                    })
+                    .catch((error) => {
+                        alert('Data gagal diupdate');
+                    });
+            }
+
+            // Hapus data
+            function hapusData(id) {
+                remove(ref(database, 'kost/' + id))
+                    .then(() => {
+                        alert('Data berhasil dihapus');
+                    })
+                    .catch((error) => {
+                        alert('Data gagal dihapus');
+                    });
+            }
+        </script>
+        </div>   
+  </section>
+</body>
+</html>

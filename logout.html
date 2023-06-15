@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style-sidebar.css">
+    <style>
+        .content {
+            margin: 50px auto;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .content h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content button:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button type="button" id="toggle-btn">
+            <i class="fa fa-bars"></i>
+        </button>
+        <span>SMARTKOST</span>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a></li>
+            <li><a href="data-kamar.html"><i class="fa fa-bed"></i>Data Kamar</a></li>
+            <li><a href="data-kost.html"><i class="fa fa-building"></i>Data Kost</a></li>
+            <li><a href="pemesanan.html"><i class="fa fa-shopping-cart"></i>Pemesanan</a></li>
+            <li><a href="logout.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+            <li id="bgModeBtn"><a href="#"><i id="bgModeIcon" class="fa fa-sun-o"></i>Mode</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="content">
+            <h1>Apakah anda ingin logout?</h1>
+            <button id="keluar">Logout</button>
+        </div>
+    </section>
+    <script defer src="sidebarLougout.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAA4bddtZ5YEWJ4Aayoi3PJl-Vit7rtXuw",
+            authDomain: "login-registersmartkost-3b717.firebaseapp.com",
+            databaseURL: "https://login-registersmartkost-3b717-default-rtdb.firebaseio.com",
+            projectId: "login-registersmartkost-3b717",
+            storageBucket: "login-registersmartkost-3b717.appspot.com",
+            messagingSenderId: "55007827923",
+            appId: "1:55007827923:web:8c9cbb839468216340c126"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        keluar.addEventListener('click', (e) => {
+            e.preventDefault(); // Mencegah button diklik secara default
+
+            try {
+                // Melakukan proses logout
+                signOut(auth)
+                    .then(() => {
+                        alert('Logout Berhasil!');
+
+                        // Redirect ke halaman login
+                        window.location.href = '../landing/index.html';
+                    })
+                    .catch((error) => {
+                        alert('Terjadi kesalahan saat melakukan logout. Mohon coba lagi.');
+                        console.log(error);
+                    });
+            } catch (error) {
+                alert('Terjadi kesalahan saat melakukan logout. Mohon coba lagi.');
+                console.log(error);
+            }
+        });
+    </script>
+</body>
+</html>
