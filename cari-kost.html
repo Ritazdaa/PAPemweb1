@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Kost</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="sidebarCari.js"></script>
+    <link rel="stylesheet" href="style-sidebar.css">
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: rgb(250, 248, 241);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button type="button" id="toggle-btn">
+        <i class="fa fa-bars"></i>
+        </button>
+        <span>SMARTKOST</span>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a></li>
+            <li><a href="cari-kost.html"><i class="fa fa-bed"></i>Cari Kost</a></li>
+            <li><a href="logout.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+            <li id="bgModeBtn"><a href="#"><i id="bgModeIcon" class="fa fa-sun-o"></i>Mode</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <div class="container">
+            <h2>Silahkan Pilih Lokasi Berdasarkan Kebutuhan Anda</h2>
+            <!-- Section Filter Lokasi -->
+            <div class="filter-lokasi">
+                <form>
+                    <div class="form-group">
+                        <label for="lokasi">Pilih Lokasi:</label>
+                        <select class="form-select" id="lokasi" name="lokasi">
+                            <option value="">Semua Lokasi</option>
+                            <option value="Cendana">Cendana</option>
+                            <option value="Flamboyan">Flamboyan</option>
+                            <option value="Kayutangi 2">Kayutangi 2</option>
+                            <option value="Pangeran">Pangeran</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Section Filter Harga -->
+            <div class="filter-harga">
+                <form>
+                    <div class="form-group">
+                        <label for="harga">Pilih Harga:</label>
+                        <select class="form-select" id="harga" name="harga">
+                            <option value="">Semua Harga</option>
+                            <option value="Rp500.000 - Rp1.000.000">Rp500.000 - Rp1.000.000</option>
+                            <option value="Rp1.000.000 - Rp2.000.000">Rp1.000.000 - Rp2.000.000</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tombol Pencarian -->
+            <div class="text-center mt-3">
+                <button id="search-button" class="btn btn-primary">Cari</button>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Mendapatkan elemen tombol "Cari"
+        let searchButton = document.getElementById('search-button');
+    
+        searchButton.addEventListener('click', function() {
+            // Dapatkan nilai yang dipilih dari dropdown lokasi
+            let lokasiDropdown = document.getElementById('lokasi');
+            let selectedLokasi = lokasiDropdown.value;
+    
+            // Dapatkan nilai yang dipilih dari dropdown harga
+            let hargaDropdown = document.getElementById('harga');
+            let selectedHarga = hargaDropdown.value;
+    
+            // Bangun nama file berdasarkan pilihan lokasi
+            let lokasiFileName = "";
+            if (selectedLokasi === "Cendana") {
+                lokasiFileName = "kost-cendana.html";
+            } else if (selectedLokasi === "Flamboyan") {
+                lokasiFileName = "kost-flamboyan.html";
+            } else if (selectedLokasi === "Kayutangi 2") {
+                lokasiFileName = "kost-kayutangi-2.html";
+            } else if (selectedLokasi === "Pangeran") {
+                lokasiFileName = "kost-pangeran.html";
+            }
+    
+            // Bangun nama file berdasarkan pilihan harga
+            let hargaFileName = "";
+            if (selectedHarga === "Rp500.000 - Rp1.000.000") {
+                hargaFileName = "kost-500.html";
+            } else if (selectedHarga === "Rp1.000.000 - Rp2.000.000") {
+                hargaFileName = "kost-sejuta.html";
+            }
+    
+            // Arahkan ke halaman HTML yang sesuai berdasarkan pilihan lokasi dan harga
+            let fileName = lokasiFileName || hargaFileName || "default.html";
+            window.location.href = fileName;
+        });
+    </script>    
+    
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script> 
+</body>
+</html>
